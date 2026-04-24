@@ -19,3 +19,8 @@ steps:
     npm run build
   displayName: 'Build App'
   workingDirectory: '$(System.DefaultWorkingDirectory)/ReactTodoUIMonolith'
+
+- script: |
+    echo %CD%
+    dir
+  displayName: 'Check Files'
