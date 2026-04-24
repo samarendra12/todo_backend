@@ -13,9 +13,9 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: '$(System.DefaultWorkingDirectory)'
+    workingDir: '$(System.DefaultWorkingDirectory)/ReactTodoUIMonolith'
 
 - script: |
     npm run build
   displayName: 'Build App'
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/ReactTodoUIMonolith'
