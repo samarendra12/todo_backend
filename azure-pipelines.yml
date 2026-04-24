@@ -1,8 +1,21 @@
-trigger: none 
-pool: Default
+trigger:
+- main
 
-steps: 
-- task: PowerShell@2
+pool:
+  name: Default
+
+steps:
+
+- task: NodeTool@0
   inputs:
-    targetType: 'inline'
-    script: 'Write-Host "Hello World"'
+    versionSpec: '16.x'
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: '$(System.DefaultWorkingDirectory)'
+
+- script: |
+    npm run build
+  displayName: 'Build App'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
