@@ -1,0 +1,21 @@
+trigger:
+- main
+
+pool:
+  name: Default
+
+steps:
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.x'
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: '$(System.DefaultWorkingDirectory)'
+
+- script: |
+    npm run build
+  displayName: 'Build App'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
