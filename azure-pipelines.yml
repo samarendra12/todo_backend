@@ -1,21 +1,8 @@
-trigger:
-- main
+trigger: none 
+pool: Default
 
-pool:
-  name: devops-agent-pool
-
-steps:
-
-- task: NodeTool@0
+steps: 
+- task: PowerShell@2
   inputs:
-    versionSpec: '16.x'
-
-- task: Npm@1
-  inputs:
-    command: 'install'
-    workingDir: '$(System.DefaultWorkingDirectory)'
-
-- script: |
-    npm run build
-  displayName: 'Build App'
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+    targetType: 'inline'
+    script: 'Write-Host "Hello World"'
