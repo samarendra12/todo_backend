@@ -10,17 +10,26 @@ steps:
   inputs:
     versionSpec: '16.x'
 
-- task: Npm@1
-  inputs:
-    command: 'install'
-    workingDir: '$(System.DefaultWorkingDirectory)'
+# 🔍 FIRST check actual files
+- script: |
+    echo Current Dir:
+    echo %CD%
+    dir
+  displayName: 'Check Files BEFORE INSTALL'
 
+# 📦 Install
+- script: |
+    npm install
+  displayName: 'Install Dependencies'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+# 🔍 Check node_modules
+- script: |
+    dir node_modules
+  displayName: 'Check node_modules'
+
+# 🏗️ Build
 - script: |
     npm run build
   displayName: 'Build App'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-
-- script: |
-    echo %CD%
-    dir
-  displayName: 'Check Files'
