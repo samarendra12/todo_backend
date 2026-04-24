@@ -21,7 +21,7 @@ steps:
 - script: |
     npm install
   displayName: 'Install Dependencies'
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '"$(System.DefaultWorkingDirectory)"'
 
 # 🔍 Check node_modules
 - script: |
@@ -32,4 +32,4 @@ steps:
 - script: |
     npm run build
   displayName: 'Build App'
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '"$(System.DefaultWorkingDirectory)"'
