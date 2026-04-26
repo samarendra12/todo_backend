@@ -33,3 +33,9 @@ steps:
     npm run build
   displayName: 'Build App'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
