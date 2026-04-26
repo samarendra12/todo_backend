@@ -39,3 +39,7 @@ steps:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+    
+- script: |
+    dir $(System.ArtifactsDirectory)
+    dir $(System.ArtifactsDirectory)/drop
