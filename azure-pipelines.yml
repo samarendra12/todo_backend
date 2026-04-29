@@ -10,36 +10,24 @@ steps:
   inputs:
     versionSpec: '16.x'
 
-# 🔍 FIRST check actual files
 - script: |
-    echo Current Dir:
-    echo %CD%
-    dir
-  displayName: 'Check Files BEFORE INSTALL'
-
-# 📦 Install
-- script: |
-    npm install
+    npm ci
   displayName: 'Install Dependencies'
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-# 🔍 Check node_modules
 - script: |
-    dir node_modules
-  displayName: 'Check node_modules'
+    npm install -g sonarqube-scanner
+    sonar-scanner ^
+      -Dsonar.projectKey=todo-app ^
+      -Dsonar.sources=. ^
+      -Dsonar.host.url=http://<YOUR-IP>:9000 ^
+      -Dsonar.login=<YOUR-TOKEN>
+  displayName: 'Run SonarQube Scan'
 
-# 🏗️ Build
 - script: |
     npm run build
   displayName: 'Build App'
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
     ArtifactName: 'drop'
-    publishLocation: 'Container'
-    
-- script: |
-    dir $(System.ArtifactsDirectory)
-    dir $(System.ArtifactsDirectory)/drop
